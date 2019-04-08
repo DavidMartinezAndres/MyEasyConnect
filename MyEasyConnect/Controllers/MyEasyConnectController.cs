@@ -12,21 +12,15 @@ namespace MyEasyConnect.Controllers
 {
     public class MyEasyConnectController : ApiController
     {
-<<<<<<< HEAD
-        [Route("getCorreos")]
-        public List<Mail> getCorreos()
-=======
+
         readonly string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" + ConfigurationManager.AppSettings["DBHost"] + ")" +
             "(PORT=" + ConfigurationManager.AppSettings["DBPort"] + "))" +
             "(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=" + ConfigurationManager.AppSettings["DBServiceName"] + ")));" +
             "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
-        public List<Mail> getCorreos(Worker worker)
->>>>>>> 136372f93c37d81443f46f4a527fea88525323bb
+
+        [Route("GetCorreos")]
+        public List<Mail> GetCorreos(Worker worker)
         {
-            string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" + ConfigurationManager.AppSettings["DBHost"] + ")" +
-          "(PORT=" + ConfigurationManager.AppSettings["DBPort"] + "))" +
-          "(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=" + ConfigurationManager.AppSettings["DBServiceName"] + ")));" +
-          "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
 
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
@@ -45,7 +39,7 @@ namespace MyEasyConnect.Controllers
                     sql.Append("       WORKER.NAME              AS \"Nombre\", ");
                     sql.Append("       WORKER.first_surname     AS \"Apellido\" ");
                     sql.Append("  FROM dmartinez.MESSAGE INNER JOIN dmartinez.worker ON WORKER.IDWORKER = MESSAGE.SENDER_ID ");
-                    sql.Append(" WHERE receiver_id = :receiver_id; ");
+                    sql.Append(" WHERE receiver_id = :receiver_id ");
 
                     cmd.CommandText = sql.ToString();
 
@@ -53,7 +47,7 @@ namespace MyEasyConnect.Controllers
 
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("receiver_id", 1);
+                    cmd.Parameters.Add("receiver_id", worker.Id);
 
                     List<Mail> mailList = new List<Mail>();
 
