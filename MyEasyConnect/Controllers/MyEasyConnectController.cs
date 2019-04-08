@@ -72,7 +72,7 @@ namespace MyEasyConnect.Controllers
         }
 
         [Route("getWorker")]
-        public Worker GetWorker()
+        public Worker GetWorker(int id)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT IDWORKER            AS \"IdWorker\", ");
@@ -98,26 +98,31 @@ namespace MyEasyConnect.Controllers
                     cmd.BindByName = true;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = 1;
+                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = id;
 
                     DataTable table = new DataTable();
 
                     Worker response = new Worker();
                     List<Worker> list = new List<Worker>();
 
-                    list = table.AsEnumerable().Select(dr =>
+                    using (OracleDataAdapter data = new OracleDataAdapter(cmd))
+                    {
+                        data.Fill(table);
+                        list = table.AsEnumerable().Select(dr =>
                             new Worker()
                             {
-                                Id = Convert.ToInt32(dr["NOCHES"]),
-                                Name = dr["RESEFECHA"].ToString(),
-                                FirstSurname = dr["NOCHES"].ToString(),
-                                SecondSurname = dr["NOMBRE_CLIENTE"].ToString(),
-                                ProfilePicture = dr["EMAIL_CLIENTE"].ToString(),
-                                Points = Convert.ToInt32(dr["NºHABITACIONES"]),
-                                Job = dr["NOMBRES_HABITACIONES"].ToString()
+                                Id = Convert.ToInt32(dr["IdWorker"]),
+                                Name = dr["Name"].ToString(),
+                                FirstSurname = dr["FirstSurname"].ToString(),
+                                SecondSurname = dr["SecondSurname"].ToString(),
+                                ProfilePicture = dr["ProfilePicture"].ToString(),
+                                Points = Convert.ToInt32(dr["POINTS"]),
+                                Job = dr["Job"].ToString()
                             }
                         ).ToList();
-                    return list.First();
+                        return list.First();
+                    }
+                    
                 }
             }
         }
