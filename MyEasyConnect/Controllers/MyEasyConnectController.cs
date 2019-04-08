@@ -16,7 +16,8 @@ namespace MyEasyConnect.Controllers
 {
     public class MyEasyConnectController : ApiController
     {
-        public List<Mail> getCorreos(Worker worker)
+        [Route("getCorreos")]
+        public List<Mail> getCorreos()
         {
             string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" + ConfigurationManager.AppSettings["DBHost"] + ")" +
           "(PORT=" + ConfigurationManager.AppSettings["DBPort"] + "))" +
@@ -48,7 +49,7 @@ namespace MyEasyConnect.Controllers
 
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("receiver_id", worker.Id);
+                    cmd.Parameters.Add("receiver_id", 1);
 
                     List<Mail> mailList = new List<Mail>();
 
