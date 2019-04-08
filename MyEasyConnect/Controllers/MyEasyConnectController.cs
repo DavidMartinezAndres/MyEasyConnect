@@ -1,6 +1,5 @@
 ﻿using MyEasyConnect.Models;
 using Oracle.ManagedDataAccess.Client;
-<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,19 +7,15 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Web;
-=======
 using System.Configuration;
 using System.Data;
 using System.Text;
-
->>>>>>> eeb2704362a71854acbc3cf38b7333170592484a
 using System.Web.Http;
 
 namespace MyEasyConnect.Controllers
 {
     public class MyEasyConnectController : ApiController
     {
-<<<<<<< HEAD
         public List<Mail> getCorreos(Worker worker)
         {
             string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" + ConfigurationManager.AppSettings["DBHost"] + ")" +
@@ -65,20 +60,23 @@ namespace MyEasyConnect.Controllers
                         mail.Subject = Convert.ToString(dr["Asunto"]);
                         mail.MailDate = Convert.ToString(dr["Fecha"]);
                         mail.MessageBody = Convert.ToString(dr["Mensaje"]);
+                        mail.SenderName = Convert.ToString(dr["Nombre"]);
+                        mail.SenderSurname = Convert.ToString(dr["Apellido"]);
+
+                        mailList.Add(mail);
                     }
+                    return mailList;
                 }
             }
                    
         }
       
 
-=======
 
         readonly string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" + ConfigurationManager.AppSettings["DBHost"] + ")" +
             "(PORT=" + ConfigurationManager.AppSettings["DBPort"] + "))" +
             "(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=" + ConfigurationManager.AppSettings["DBServiceName"] + ")));" +
             "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
->>>>>>> eeb2704362a71854acbc3cf38b7333170592484a
 
         [Route("getWorker/{id}")]
         public Worker GetWorker(int id)
