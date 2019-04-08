@@ -7,5 +7,6 @@
         public string Subject { get; set; }
         public string MailDate { get; set; }
         public string MessageBody { get; set; }
+
     }
 }
