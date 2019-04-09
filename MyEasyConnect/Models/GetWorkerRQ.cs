@@ -7,11 +7,6 @@ namespace MyEasyConnect.Models
 {
     public class GetWorkerRQ
     {
-        public Worker Worker { get; set; }
-
-        public GetWorkerRQ(Worker worker)
-        {
-            this.Worker = worker;
-        }
+        public int WorkerId { get; set; }
     }
 }

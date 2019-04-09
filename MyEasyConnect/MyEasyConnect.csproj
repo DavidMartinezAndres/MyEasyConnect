@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Models\GetWorkerRS.cs" />
     <Compile Include="Controllers\MyEasyConnectController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -96,6 +97,7 @@
     <Compile Include="Models\GetCorreosRS.cs" />
     <Compile Include="Models\GetRemindersRQ.cs" />
     <Compile Include="Models\GetRemindersRS.cs" />
+    <Compile Include="Models\GetWorkerRQ.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\Worker.cs" />

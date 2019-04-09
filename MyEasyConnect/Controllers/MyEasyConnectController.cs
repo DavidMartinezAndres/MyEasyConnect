@@ -71,7 +71,8 @@ namespace MyEasyConnect.Controllers
         }
 
         [Route("getWorker")]
-        public Worker GetWorker(int id)
+        [HttpPost]
+        public GetWorkerRS GetWorker([FromBody] GetWorkerRQ requestItem)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT IDWORKER            AS \"IdWorker\", ");
@@ -97,14 +98,14 @@ namespace MyEasyConnect.Controllers
                     cmd.BindByName = true;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = id;
+                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = requestItem.WorkerId;
 
                     DataTable table = new DataTable();
 
                     using (OracleDataAdapter data = new OracleDataAdapter(cmd))
                     {
                         data.Fill(table);
-                        return table.AsEnumerable().Select(dr =>
+                        Worker worker = table.AsEnumerable().Select(dr =>
                             new Worker()
                             {
                                 Id = Convert.ToInt32(dr["IdWorker"]),
@@ -116,6 +117,7 @@ namespace MyEasyConnect.Controllers
                                 Job = dr["Job"].ToString()
                             }
                         ).ToList().First();
+                        return new GetWorkerRS() { Worker = worker } ;
                     }
                 }
             }

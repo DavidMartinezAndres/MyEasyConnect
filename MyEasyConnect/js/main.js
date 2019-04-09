@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Get worker
-    getWorker(1);
+    getWorker();
 
     // Uncomment this line to change the language to english
     moment.locale('en')
@@ -165,23 +165,22 @@ function toggleReminder(ev) {
         document.querySelector("#team-wrapper").appendChild(div)
     });
 })()
-function getWorker(id) {
-    fetch("http://localhost:62114/getWorker", {
+function getWorker() {
+    fetch("http://localhost:62114/getWorker/?id=" + "1", {
         method: 'POST',
         body: JSON.stringify({
-            id: "1"
-        })
-    
-    }),
+            WorkerId: "1"
+        }),
         headers: {
-        'Content-Type' : 'application/json'
-    }
-    }).then(res => res.json()){
+            'Content-Type': 'application/json'
+
+        }
+    }).then(res => res.json()).then(response => {
         console.log(response);
+        console.log(response.Worker.Name);
+        $('#imagenUsuario').attr('src', "images/senior.png");
+        $('#nombreUsuario').text(response.Worker.Name + " " + response.Worker.FirstSurname);
+
+    });
     }
-    /**$.get("http://localhost:62114/getWorker/?id=" + id, function (data, status) {
-        data.ProfilePicture = "images/senior.png"; 
-        $('#imagenUsuario').attr('src', data.ProfilePicture);
-       $('#nombreUsuario').text(data.Name + " " + data.FirstSurname)
-    });*/
-}
+
