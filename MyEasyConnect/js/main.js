@@ -1,4 +1,7 @@
-$( document ).ready(function() {
+$(document).ready(function () {
+    // Get worker
+    getWorker(1);
+
     // Uncomment this line to change the language to english
     moment.locale('en')
     let now = moment().startOf('month')
@@ -165,3 +168,11 @@ function updateCalendar(now) {
         document.querySelector("#team-wrapper").appendChild(div)
     });
 })()
+function getWorker(id) {
+    $.get("http://localhost:62114/getWorker/?id=" + id, function (data, status) {
+        console.log(data);
+        data.ProfilePicture = "images/senior.png"; 
+        $('#imagenUsuario').attr('src', data.ProfilePicture);
+       $('#nombreUsuario').text(data.Name + " " + data.FirstSurname)
+    });
+}
