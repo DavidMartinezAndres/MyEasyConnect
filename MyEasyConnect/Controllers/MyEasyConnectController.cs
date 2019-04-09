@@ -78,15 +78,16 @@ namespace MyEasyConnect.Controllers
         public GetWorkerRS GetWorker([FromBody] GetWorkerRQ requestItem)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append("SELECT IDWORKER            AS \"IdWorker\", ");
-            sql.Append("       W.NAME              AS \"Name\", ");
-            sql.Append("       FIRST_SURNAME       AS \"FirstSurname\", ");
-            sql.Append("       SECOND_SURNAME      AS \"SecondSurname\", ");
-            sql.Append("       PROFILE_PICTURE     AS \"ProfilePicture\", ");
+            sql.Append("SELECT IDWORKER            IdWorker, ");
+            sql.Append("       W.NAME              Name, ");
+            sql.Append("       FIRST_SURNAME       FirstSurname, ");
+            sql.Append("       SECOND_SURNAME      SecondSurname, ");
+            sql.Append("       PROFILE_PICTURE     ProfilePicture, ");
             sql.Append("       POINTS, ");
-            sql.Append("       J.NAME              AS \"Job\" ");
+            sql.Append("       J.NAME              Job ");
             sql.Append("  FROM DMARTINEZ.WORKER W INNER JOIN JOB J ON W.IDJOB = J.ID ");
             sql.Append(" WHERE W.IDWORKER = :IDWORKER ");
+
 
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
@@ -111,13 +112,13 @@ namespace MyEasyConnect.Controllers
                         Worker worker = table.AsEnumerable().Select(dr =>
                             new Worker()
                             {
-                                Id = Convert.ToInt32(dr["IdWorker"]),
-                                Name = dr["Name"].ToString(),
-                                FirstSurname = dr["FirstSurname"].ToString(),
-                                SecondSurname = dr["SecondSurname"].ToString(),
-                                ProfilePicture = dr["ProfilePicture"].ToString(),
+                                Id = Convert.ToInt32(dr["IDWORKER"]),
+                                Name = dr["NAME"].ToString(),
+                                FirstSurname = dr["FIRSTSURNAME"].ToString(),
+                                SecondSurname = dr["SECONDSURNAME"].ToString(),
+                                ProfilePicture = dr["PROFILEPICTURE"].ToString(),
                                 Points = Convert.ToInt32(dr["POINTS"]),
-                                Job = dr["Job"].ToString()
+                                Job = dr["JOB"].ToString()
                             }
                         ).ToList().First();
                         return new GetWorkerRS() { Worker = worker } ;
@@ -130,16 +131,17 @@ namespace MyEasyConnect.Controllers
         public List<Worker> GetCircleCare(int id)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append("SELECT W.IDWORKER          AS \"IdWorker\", ");
-            sql.Append("       W.NAME              AS \"Name\", ");
-            sql.Append("       FIRST_SURNAME       AS \"FirstSurname\", ");
-            sql.Append("       SECOND_SURNAME      AS \"SecondSurname\", ");
-            sql.Append("       PROFILE_PICTURE     AS \"ProfilePicture\", ");
-            sql.Append("       POINTS              AS \"Points\", ");
-            sql.Append("       J.NAME              AS \"Job\" ");
+            sql.Append("SELECT W.IDWORKER          IdWorker, ");
+            sql.Append("       W.NAME              Name, ");
+            sql.Append("       FIRST_SURNAME       FirstSurname, ");
+            sql.Append("       SECOND_SURNAME      SecondSurname, ");
+            sql.Append("       PROFILE_PICTURE     ProfilePicture, ");
+            sql.Append("       POINTS              Points, ");
+            sql.Append("       J.NAME              Job ");
             sql.Append("  FROM DMARTINEZ.WORKER  W ");
             sql.Append("       INNER JOIN CIRCLECARE CC ON W.IDWORKER = CC.IDFRIEND AND CC.IDWORKER = :IDWORKER ");
             sql.Append("       INNER JOIN JOB J ON W.IDJOB = J.ID ");
+
 
 
             using (OracleConnection conn = new OracleConnection(connectionString))
@@ -165,13 +167,13 @@ namespace MyEasyConnect.Controllers
                         return table.AsEnumerable().Select(dr =>
                             new Worker()
                             {
-                                Id = Convert.ToInt32(dr["IdWorker"]),
-                                Name = dr["Name"].ToString(),
-                                FirstSurname = dr["FirstSurname"].ToString(),
-                                SecondSurname = dr["SecondSurname"].ToString(),
-                                ProfilePicture = dr["ProfilePicture"].ToString(),
+                                Id = Convert.ToInt32(dr["IDWORKER"]),
+                                Name = dr["NAME"].ToString(),
+                                FirstSurname = dr["FIRSTSURNAME"].ToString(),
+                                SecondSurname = dr["SECONDSURNAME"].ToString(),
+                                ProfilePicture = dr["PROFILEPICTURE"].ToString(),
                                 Points = Convert.ToInt32(dr["POINTS"]),
-                                Job = dr["Job"].ToString()
+                                Job = dr["JOB"].ToString()
                             }
                         ).ToList();
 
