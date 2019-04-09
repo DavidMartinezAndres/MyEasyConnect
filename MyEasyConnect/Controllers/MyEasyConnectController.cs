@@ -19,7 +19,7 @@ namespace MyEasyConnect.Controllers
             "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
 
         [Route("GetCorreos")]
-        public List<Mail> GetCorreos(Worker worker)
+        public List<Mail> GetCorreos(int id)
         {
 
             using (OracleConnection conn = new OracleConnection(connectionString))
@@ -47,7 +47,7 @@ namespace MyEasyConnect.Controllers
 
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("receiver_id", worker.Id);
+                    cmd.Parameters.Add("receiver_id", id);
 
                     List<Mail> mailList = new List<Mail>();
 
@@ -125,6 +125,55 @@ namespace MyEasyConnect.Controllers
                 }
             }
         }
+
+        [Route("getReminders")]
+        public List<Reminder> GetReminders(int id)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append("SELECT idreminder           AS \"Id\", ");
+            sql.Append("       remindertitle        AS \"Title\", ");
+            sql.Append("       remindersubtitle     AS \"Subtitle\", ");
+            sql.Append("       reminderdate         AS \"EventDate\", ");
+            sql.Append("       description          AS \"Description\" ");
+            sql.Append("  FROM dmartinez.reminder ");
+            sql.Append(" WHERE idworker = :idworker ");
+
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+
+                using (OracleCommand cmd = new OracleCommand())
+                {
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = sql.ToString();
+
+                    cmd.BindByName = true;
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.Add("idworker", id);
+
+                    List<Reminder> ResponseList = new List<Reminder>();
+
+                    OracleDataReader dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        Reminder reminder = new Reminder();
+
+                        reminder.Id = Convert.ToInt32(dr["Id"]);
+                        reminder.Title = Convert.ToString(dr["Title"]);
+                        reminder.Subtitle = Convert.ToString(dr["Subtitle"]);
+                        reminder.EventDate = Convert.ToString(dr["EventDate"]);
+                        reminder.Description = Convert.ToString(dr["Description"]);
+
+                        ResponseList.Add(reminder);
+                    }
+
+                    return ResponseList;
+                }
+
+            }
+        } 
 
     }
 }
