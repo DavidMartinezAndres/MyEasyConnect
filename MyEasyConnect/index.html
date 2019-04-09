@@ -191,23 +191,23 @@
                         <p>2 JULY / MONDAY</p>
 
                         <div v-for="reminder in reminders" class="reminder-wrapper">
-                                <div class="reminder">
-                                    <i class="fa fa-calendar"></i>
-                                    <div class="reminder-info">
-                                        <h4 id="reminderTitle">{{reminder.Title}}</h4>
-                                        <p id="reminderSubtitle">{{reminder.Subtitle}}</p>
-                                    </div>
-                                    <i class="fa fa-close expand-reminder" onclick="toggleReminder(event)"></i>
+                            <div class="reminder">
+                                <i class="fa fa-calendar"></i>
+                                <div class="reminder-info">
+                                    <h4 id="reminderTitle">{{reminder.Title}}</h4>
+                                    <p id="reminderSubtitle">{{reminder.Subtitle}}</p>
                                 </div>
-                                <div id="reminderDescription" class="expanded-reminder bg-primary ">
-                                    <p><strong>{{reminder.EventDate}}</strong></p>
-                                    <p>{{reminder.Description}}</p>
-                                    <div class="button-group">
-                                        <button class="green-button">CHANGE</button>
-                                        <button class="red-button">DONE</button>
-                                    </div>
-                                    <div class="clear"></div>
-                                </div>                          
+                                <i class="fa fa-close expand-reminder" onclick="toggleReminder(event)"></i>
+                            </div>
+                            <div id="reminderDescription" class="expanded-reminder bg-primary ">
+                                <p><strong>{{reminder.EventDate}}</strong></p>
+                                <p>{{reminder.Description}}</p>
+                                <div class="button-group">
+                                    <button class="green-button">CHANGE</button>
+                                    <button class="red-button">DONE</button>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
                         </div>
 
 
@@ -262,6 +262,7 @@
                     </div>
                 </div>
             </section>
+        </main>
     </div>
     <!-- End of circle care -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
@@ -272,14 +273,26 @@
         var app = new Vue({
             el: '#app',
             data: {
+                uri: 'http://localhost:62114',
                 messages: [],
                 reminders: []
             },
             created: async function () {
                 let items = await fetch("http://localhost:62114/GetCorreos?id=" + "1")
                 this.messages = await items.json()
-                let items2 = await fetch("http://localhost:62114/getReminders?id=" + "1")
-                this.reminders = await items2.json()
+
+                let items2 = await fetch(this.uri + "/getReminders", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        "WorkerId": 1,
+                        
+                    }),
+                })
+                let response = await items2.json()
+                this.reminders = response.ReminderList
             },
         })
 
@@ -287,7 +300,7 @@
 
     <script src="js/main.js"></script>
 
-    </main>
+  
 
 </body>
 </html>
