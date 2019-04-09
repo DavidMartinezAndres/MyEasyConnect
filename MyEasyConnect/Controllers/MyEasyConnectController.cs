@@ -12,11 +12,7 @@ namespace MyEasyConnect.Controllers
 {
     public class MyEasyConnectController : ApiController
     {
-
-        readonly string connectionString = "Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=" + ConfigurationManager.AppSettings["DBHost"] + ")" +
-            "(PORT=" + ConfigurationManager.AppSettings["DBPort"] + "))" +
-            "(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=" + ConfigurationManager.AppSettings["DBServiceName"] + ")));" +
-            "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
+        readonly string connectionString = ConfigurationManager.ConnectionStrings["Test"].ConnectionString;
 
         [Route("getCorreos")]
         [HttpPost]
