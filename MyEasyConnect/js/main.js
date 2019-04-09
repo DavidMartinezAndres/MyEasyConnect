@@ -121,3 +121,47 @@ function updateCalendar(now) {
     $('#calendar-body').append(tr)
     
 }
+
+(async function getCircleCare() {
+    let workerId = 1
+    let request = await fetch("http://localhost:62114/getCircleCare?id="+workerId)    
+    let workers = await request.json()
+    console.log(workers)
+    workers.forEach(worker => {
+        let div = document.createElement("div")
+        let mainDiv = document.createElement("div")
+        mainDiv.classList.add("profile-card","red-card")
+        let profileCard = document.createElement("div")
+        
+
+        let imgDiv = document.createElement("div")
+        let userImg = document.createElement("img")
+        userImg.src= "images/senior.png"
+        imgDiv.appendChild(userImg)
+
+        let textDiv = document.createElement("div")
+        textDiv.classList.add("user-name")
+
+        let h3 = document.createElement("h3")
+        h3.innerHTML = worker.Name + " " + worker.FirstSurname
+        if (worker.SecondSurname != "") {
+            h3.innerHTML += " " + worker.SecondSurname
+        }
+
+        let p = document.createElement("p")
+        p.innerHTML = worker.Job
+
+        textDiv.appendChild(h3)
+        textDiv.appendChild(p)
+
+        let button = document.createElement("button")
+        button.classList.add("red-button")
+        button.innerHTML= "Send Message"
+
+        mainDiv.appendChild(imgDiv) 
+        mainDiv.appendChild(textDiv) 
+        mainDiv.appendChild(button) 
+        div.appendChild(mainDiv)
+        document.querySelector("#team-wrapper").appendChild(div)
+    });
+})()

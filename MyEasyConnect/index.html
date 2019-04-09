@@ -142,23 +142,23 @@
 
                 <div>
                     <ul id="mail-list">
-                        <li>
+                        <li v-for="message in messages">
                             <div class="mail">
                                 <div class="left">
                                     <input type="checkbox">
                                     <i class="fa fa-circle icon-selected"></i>
-                                    <strong>John Snow</strong>
-                                    <p>Hi Friend!!</p>
+                                    <strong>{{message.SenderName}} {{message.SenderSurname}}</strong>
+                                    <p>{{message.Subject}}</p>
                                 </div>
                                 <div class="right">
-                                    <p>12 April 2014</p>
+                                    <p>{{message.MailDate}}</p>
                                     <i class="fa fa-angle-right expand-mail"></i>
                                 </div>
                             </div>
 
                             <article class="hidden">
-                                <h3>Hi Friend!!</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
+                                <h3>{{message.Subject}}</h3>
+                                <p>{{message.MessageBody}}</p>
                                 <div>
                                     <button class="green-button">REPLY</button>
                                     <button class="red-button delete-mail">DELETE</button>
@@ -167,107 +167,6 @@
                             </article>
                             <div class="clear"></div>
 
-                        </li>
-                        <li>
-                            <div class="mail">
-                                <div class="left">
-                                    <input type="checkbox">
-                                    <i class="fa fa-circle"></i>
-                                    <strong>Richard Chaning</strong>
-                                    <p>Memorial Clinic</p>
-                                </div>
-                                <div class="right">
-                                    <p>12 April 2014</p>
-                                    <i class="fa fa-angle-right expand-mail"></i>
-                                </div>
-                            </div>
-                            <article class="hidden">
-                                <h3>Hi Friend!!</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
-                                <div>
-                                    <button class="green-button">REPLY</button>
-                                    <button class="red-button delete-mail">DELETE</button>
-                                </div>
-                                
-                            </article>
-                            <div class="clear"></div>
-
-                        </li>
-
-                        <li>
-                            <div class="mail">
-                                <div class="left">
-                                    <input type="checkbox">
-                                    <i class="fa fa-circle"></i>
-                                    <strong>Elisabeth Bale</strong>
-                                    <p>From Connecticut</p>
-                                </div>
-                                <div class="right">
-                                    <p>21 June 2013</p>
-                                    <i class="fa fa-angle-right expand-mail"></i>
-                                </div>
-                            </div>
-                            <article class="hidden">
-                                <h3>Hi Friend!!</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
-                                <div>
-                                    <button class="green-button">REPLY</button>
-                                    <button class="red-button delete-mail">DELETE</button>
-                                </div>
-                                
-                            </article>
-                            <div class="clear"></div>
-
-                        </li>
-
-                        <li>
-                            <div class="mail">
-                                <div class="left">
-                                    <input type="checkbox">
-                                    <i class="fa fa-circle"></i>
-                                    <strong>Sarah Connor</strong>
-                                    <p>Cyberdyne Systems</p>
-                                </div>
-                                <div class="right">
-                                    <p>20 June 2013</p>
-                                    <i class="fa fa-angle-right expand-mail"></i>
-                                </div>
-                            </div>
-                            <article class="hidden">
-                                <h3>Hi Friend!!</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
-                                <div>
-                                    <button class="green-button">REPLY</button>
-                                    <button class="red-button delete-mail">DELETE</button>
-                                </div>
-                                
-                            </article>
-                            <div class="clear"></div>
-                        </li>
-                        
-                        <li>
-                            <div class="mail">
-                                <div class="left">
-                                    <input type="checkbox">
-                                    <i class="fa fa-circle"></i>
-                                    <strong>Arturo González</strong>
-                                    <p>Recordatorio Consulta</p>
-                                </div>
-                                <div class="right">
-                                    <p>20 June 2013</p>
-                                    <i class="fa fa-angle-right expand-mail"></i>
-                                </div>
-                            </div>
-                            <article class="hidden">
-                                <h3>Hi Friend!!</h3>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
-                                <div>
-                                    <button class="green-button">REPLY</button>
-                                    <button class="red-button delete-mail">DELETE</button>
-                                </div>
-                                
-                            </article>
-                            <div class="clear"></div>
                         </li>
                     </ul>
                     <div><p class="more-messages bg-primary">5 Previously Messages</p></div>
@@ -371,58 +270,7 @@
                     
 
                     <p class="circle-info">For organize Drag & Drop in the groups</p>
-                    <div id="team-wrapper">
-                        <div>
-                            <div class="profile-card red-card">
-                                <div><img src="images/senior.png" alt="user foto"></div>
-                                <div class="user-name">
-                                    <h3>Francis Fisher Williams</h3>
-                                    <p>Graphic Designer</p>
-                                </div>
-                                <button class="red-button">Send Message</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="profile-card red-card">
-                                <div><img src="images/senior.png" alt="user foto"></div>
-                                <div class="user-name">
-                                    <h3>Marie Kraft Smith</h3>
-                                    <p>Doctor</p>
-                                </div>
-                                <button class="green-button">Send Message</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="profile-card red-card">
-                                <div><img src="images/senior.png" alt="user foto"></div>
-                                <div class="user-name">
-                                    <h3>Dolores Vidal Taylor</h3>
-                                    <p>Comercial</p>
-                                </div>
-                                <button class="red-button">Send Message</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="profile-card red-card">
-                                <div><img src="images/senior.png" alt="user foto"></div>
-                                <div class="user-name">
-                                    <h3>Robbie Walker Jr.</h3>
-                                    <p>CEO NY Memorial</p>
-                                </div>
-                                <button class="red-button">Send Message</button>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="profile-card red-card">
-                                <div><img src="images/senior.png" alt="user foto"></div>
-                                <div class="user-name">
-                                    <h3>Vanessa Herrera Simons</h3>
-                                    <p>Nurse</p>
-                                </div>
-                                <button class="green-button">Send Message</button>
-                            </div>
-                        </div>
-                    </div>
+                    <div id="team-wrapper"></div>
                 </div>
             </div>
         </section>
@@ -430,6 +278,21 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js"></script>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+            el: '#mail-wrapper',
+            data: {
+                messages: []
+            },
+            created: async function () {
+                let items = await fetch("http://localhost:62114/GetCorreos?id="+"1")
+                this.messages = await items.json()
+            },
+            })
+        
+        </script>
+
         <script src="js/main.js"></script>
         
     </main>
