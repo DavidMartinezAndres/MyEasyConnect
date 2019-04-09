@@ -101,13 +101,63 @@ namespace MyEasyConnect.Controllers
 
                     DataTable table = new DataTable();
 
-                    Worker response = new Worker();
-                    List<Worker> list = new List<Worker>();
+                    using (OracleDataAdapter data = new OracleDataAdapter(cmd))
+                    {
+                        data.Fill(table);
+                        return table.AsEnumerable().Select(dr =>
+                            new Worker()
+                            {
+                                Id = Convert.ToInt32(dr["IdWorker"]),
+                                Name = dr["Name"].ToString(),
+                                FirstSurname = dr["FirstSurname"].ToString(),
+                                SecondSurname = dr["SecondSurname"].ToString(),
+                                ProfilePicture = dr["ProfilePicture"].ToString(),
+                                Points = Convert.ToInt32(dr["POINTS"]),
+                                Job = dr["Job"].ToString()
+                            }
+                        ).ToList().First();
+                    }
+                }
+            }
+        }
+
+        [Route("getCircleCare")]
+        public List<Worker> getCircleCare(int id)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append("SELECT W.IDWORKER          AS \"IdWorker\", ");
+            sql.Append("       W.NAME              AS \"Name\", ");
+            sql.Append("       FIRST_SURNAME       AS \"FirstSurname\", ");
+            sql.Append("       SECOND_SURNAME      AS \"SecondSurname\", ");
+            sql.Append("       PROFILE_PICTURE     AS \"ProfilePicture\", ");
+            sql.Append("       POINTS              AS \"Points\", ");
+            sql.Append("       J.NAME              AS \"Job\" ");
+            sql.Append("  FROM DMARTINEZ.WORKER  W ");
+            sql.Append("       INNER JOIN CIRCLECARE CC ON W.IDWORKER = CC.IDFRIEND AND CC.IDWORKER = :IDWORKER ");
+            sql.Append("       INNER JOIN JOB J ON W.IDJOB = J.ID ");
+
+
+            using (OracleConnection conn = new OracleConnection(connectionString))
+            {
+                conn.Open();
+
+                using (OracleCommand cmd = new OracleCommand())
+                {
+                    cmd.Connection = conn;
+
+                    cmd.CommandText = sql.ToString();
+
+                    cmd.BindByName = true;
+                    cmd.CommandType = CommandType.Text;
+
+                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = id;
+
+                    DataTable table = new DataTable();
 
                     using (OracleDataAdapter data = new OracleDataAdapter(cmd))
                     {
                         data.Fill(table);
-                        list = table.AsEnumerable().Select(dr =>
+                        return table.AsEnumerable().Select(dr =>
                             new Worker()
                             {
                                 Id = Convert.ToInt32(dr["IdWorker"]),
@@ -119,9 +169,8 @@ namespace MyEasyConnect.Controllers
                                 Job = dr["Job"].ToString()
                             }
                         ).ToList();
-                        return list.First();
+
                     }
-                    
                 }
             }
         }

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>My Easy Connect main page</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <img id="logo" src="images/logo-easy-connect_SBS.png" alt="Logo pagina">
+            <ul>
+                <li id="senior">
+                    <img src="images/senior.png" alt="foto de usuario">
+                    <strong >Cordelia Carpenter</strong>
+                </li>
+                <li class="nav-options">
+                    <img src="images/config.png" alt="Configuracion">
+                    <strong>SETTINGS</strong>
+                </li>
+                <li><img  class="separator" src="images/dot3.png" alt="separador"></li>
+                <li id="logout" class="nav-options">
+                    <img src="images/logout.png" alt="logout" >
+                    <strong>LOGOUT</strong>
+                </li>
+            </ul>
+        </nav>
+        <div class="clear"></div>
+    </header>
+
+    <main>
+
+        <!-- list of the menu options -->
+        <section id="menu-wrapper">
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">
+                    <img src="images/warnings-off2.png" alt="warning icon">
+                    <p>ALERTS AND MESSAGING</p>
+                </div>
+                <div class="badge">
+                    <img src="images/ellipse 1.png" >
+                    <p>2</p>
+                </div>
+                <img class="layer3" src="images/layer 3.png" alt=""  >
+            </div>
+
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">
+                    <img src="images/reminders-calendar.png" alt="calendar icon">
+                    <p>REMINDERS CALENDAR</p>
+                </div>
+                <div class="badge">
+                    <img src="images/ellipse 1.png" >
+                    <p>1</p>
+                </div>
+                <img class="layer3" src="images/layer 3.png" >
+            </div>
+
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">
+                    <img src="images/ties2.png" alt="circle of care icon">
+                    <p>CIRCLE OF CARE</p>
+                </div>
+                <div class="badge">
+                    <img src="images/ellipse 1.png" >
+                    <p>2</p>
+                </div>
+                <img class="layer3" src="images/layer 3.png" alt=""  >
+            </div>
+
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">
+                    <img src="images/daily-care-o-gram.png" alt="care-o-gram icon">
+                    <p>DAILY CARE-O-GRAM</p>
+                </div>
+                <div class="badge">
+                    <img src="images/ellipse 1.png" >
+                    <p>1</p>
+                </div>
+                <img class="layer3" src="images/layer 3.png" alt=""  >
+            </div>
+
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">
+                    <img src="images/casemanager.png" alt="repository icon">
+                    <p>REPOSITORY</p>
+                </div>  
+                <img class="layer3" src="images/layer 3.png" alt=""  >
+            </div>
+
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">
+                    <img src="images/my-health-reports (1).png" alt="reports icon">
+                    <p>REPORTS</p>
+                </div>
+                <img class="layer3" src="images/layer 3.png" alt=""  >
+            </div>
+
+            <div class="menu-actions text-primary">
+                <img class="layer2" src="images/layer 2.png" alt="opciones">
+                <div class="action-data">   
+                    <img src="images/reward-points.png" alt="points icon">
+                    <p>MY POINTS</p>
+                </div>
+                <p class="total-points">Total Points 725</p>
+                <img class="layer3" src="images/layer 3.png" alt=""  >
+            </div>
+        </section>
+        <!-- End of menu options -->
+
+        <!-- Alerts and messaging -->
+        <section id="messaging">
+            <div class="banner text-primary">
+                <img class="banner-img" src="images/warnings-off2.png" alt="warning icon">
+                <p>alerts and messaging</p>
+            </div>
+
+            <div id="mail-wrapper" class="wrapper">
+
+                <!-- alerts and messaging header -->
+                <div id="mail-menu">
+                    
+                    <ul>
+                        <input type="checkbox">
+                        <li class="selected">New Message</li>
+                        <li>Inbox</li>
+                        <li class="bg-primary">Sent</li>
+                    </ul>
+
+                    <input type="text" placeholder="Search">
+                </div>
+
+                <div>
+                    <ul id="mail-list">
+                        <li>
+                            <div class="mail">
+                                <div class="left">
+                                    <input type="checkbox">
+                                    <i class="fa fa-circle icon-selected"></i>
+                                    <strong>John Snow</strong>
+                                    <p>Hi Friend!!</p>
+                                </div>
+                                <div class="right">
+                                    <p>12 April 2014</p>
+                                    <i class="fa fa-angle-right expand-mail"></i>
+                                </div>
+                            </div>
+
+                            <article class="hidden">
+                                <h3>Hi Friend!!</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
+                                <div>
+                                    <button class="green-button">REPLY</button>
+                                    <button class="red-button delete-mail">DELETE</button>
+                                </div>
+                                
+                            </article>
+                            <div class="clear"></div>
+
+                        </li>
+                        <li>
+                            <div class="mail">
+                                <div class="left">
+                                    <input type="checkbox">
+                                    <i class="fa fa-circle"></i>
+                                    <strong>Richard Chaning</strong>
+                                    <p>Memorial Clinic</p>
+                                </div>
+                                <div class="right">
+                                    <p>12 April 2014</p>
+                                    <i class="fa fa-angle-right expand-mail"></i>
+                                </div>
+                            </div>
+                            <article class="hidden">
+                                <h3>Hi Friend!!</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
+                                <div>
+                                    <button class="green-button">REPLY</button>
+                                    <button class="red-button delete-mail">DELETE</button>
+                                </div>
+                                
+                            </article>
+                            <div class="clear"></div>
+
+                        </li>
+
+                        <li>
+                            <div class="mail">
+                                <div class="left">
+                                    <input type="checkbox">
+                                    <i class="fa fa-circle"></i>
+                                    <strong>Elisabeth Bale</strong>
+                                    <p>From Connecticut</p>
+                                </div>
+                                <div class="right">
+                                    <p>21 June 2013</p>
+                                    <i class="fa fa-angle-right expand-mail"></i>
+                                </div>
+                            </div>
+                            <article class="hidden">
+                                <h3>Hi Friend!!</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
+                                <div>
+                                    <button class="green-button">REPLY</button>
+                                    <button class="red-button delete-mail">DELETE</button>
+                                </div>
+                                
+                            </article>
+                            <div class="clear"></div>
+
+                        </li>
+
+                        <li>
+                            <div class="mail">
+                                <div class="left">
+                                    <input type="checkbox">
+                                    <i class="fa fa-circle"></i>
+                                    <strong>Sarah Connor</strong>
+                                    <p>Cyberdyne Systems</p>
+                                </div>
+                                <div class="right">
+                                    <p>20 June 2013</p>
+                                    <i class="fa fa-angle-right expand-mail"></i>
+                                </div>
+                            </div>
+                            <article class="hidden">
+                                <h3>Hi Friend!!</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
+                                <div>
+                                    <button class="green-button">REPLY</button>
+                                    <button class="red-button delete-mail">DELETE</button>
+                                </div>
+                                
+                            </article>
+                            <div class="clear"></div>
+                        </li>
+                        
+                        <li>
+                            <div class="mail">
+                                <div class="left">
+                                    <input type="checkbox">
+                                    <i class="fa fa-circle"></i>
+                                    <strong>Arturo González</strong>
+                                    <p>Recordatorio Consulta</p>
+                                </div>
+                                <div class="right">
+                                    <p>20 June 2013</p>
+                                    <i class="fa fa-angle-right expand-mail"></i>
+                                </div>
+                            </div>
+                            <article class="hidden">
+                                <h3>Hi Friend!!</h3>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod fugiat ullam officiis perferendis omnis iure, ea quasi consequatur inventore incidunt id ad aliquid non sequi, delectus nulla asperiores hic!</p>
+                                <div>
+                                    <button class="green-button">REPLY</button>
+                                    <button class="red-button delete-mail">DELETE</button>
+                                </div>
+                                
+                            </article>
+                            <div class="clear"></div>
+                        </li>
+                    </ul>
+                    <div><p class="more-messages bg-primary">5 Previously Messages</p></div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </section>
+        <!-- End of Alerts and messaging -->
+
+        <!-- Reminders calendar -->
+        <section id="reminders">
+            <div class="banner text-primary">
+                <img class="banner-img" src="images/reminders-calendar.png" alt="warning icon">
+                <p>reminders calendar</p>
+                <img class="additionalbanner-img" src="images/Titular barra.png" alt="">
+            </div>
+
+            <!-- reminders section -->
+            <div id="calendar-wrapper" class="wrapper">
+
+                <div id="today-schedule">
+                    <h3>TODAY</h3>
+                    <p>2 JULY / MONDAY</p>
+                    <div class="reminder-wrapper">
+                        <div class="reminder">
+                            <i class="fa fa-phone"></i>
+                            <div class="reminder-info">
+                                <h4>Call Dr. Smith</h4>
+                                <p>675 557 890</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                    <div class="reminder-wrapper">
+                        <div class="reminder">
+                            <i class="fa fa-calendar"></i>
+                            <div class="reminder-info">
+                                <h4>OcularTest</h4>
+                                <p>Memorial Clinic Miami</p>
+                            </div>
+                            <i class="fa fa-close expand-reminder"></i>
+                        </div>
+                        <div class="expanded-reminder bg-primary ">
+                            <p>2 JULY 2012 / <strong>14:30</strong></p>
+                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, laborum aspernatur, illo earum consequuntur odio eligendi quo qui reprehenderit aut beatae architecto doloremque ipsa, eius dicta sapiente. Maiores, accusantium fugiat.</p>
+                            <div class="button-group">
+                                <button class="green-button">CHANGE</button>
+                                <button class="red-button">DONE</button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                <!-- calendar -->
+                <div id="calendar">
+                    <!-- calendar month picker -->
+                    <div id="calendar-header" class=" text-primary">
+                        <i class="fa fa-angle-left" id="next-month"></i>
+                        <h3>JULY 2014</h3>
+                        <i class="fa fa-angle-right"></i>
+                    </div>
+                    
+                    <div>
+                        <table>
+                            <thead id="calendar-head"></thead>
+                            <tbody id="calendar-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+        <!-- End of Reminders Calendar -->
+
+        <!-- Circle of care -->
+        <section id="circle-care">
+            <div class="banner text-primary">
+                <img class="banner-img" src="images/ties2.png" alt="warning icon">
+                <p>circle of care</p>
+            </div>
+
+            <div id="circle-wrapper" class="wrapper text-primary">
+                <!-- Navigator from circle care -->
+                <div id="circle-nav">
+                    <div><p>FIND</p></div>
+                    <div class="selected-nav"><p>MY CIRCLE OF CARE</p></div>
+                    <div class="pending">
+                        <p>PENDING</p>
+                        <div class="care-badge">
+                            <img src="images/ellipse 1.png" >
+                            <p>1</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="my-circle" class="bg-primary">
+                    
+
+                    <p class="circle-info">For organize Drag & Drop in the groups</p>
+                    <div id="team-wrapper">
+                        <div>
+                            <div class="profile-card red-card">
+                                <div><img src="images/senior.png" alt="user foto"></div>
+                                <div class="user-name">
+                                    <h3>Francis Fisher Williams</h3>
+                                    <p>Graphic Designer</p>
+                                </div>
+                                <button class="red-button">Send Message</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="profile-card red-card">
+                                <div><img src="images/senior.png" alt="user foto"></div>
+                                <div class="user-name">
+                                    <h3>Marie Kraft Smith</h3>
+                                    <p>Doctor</p>
+                                </div>
+                                <button class="green-button">Send Message</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="profile-card red-card">
+                                <div><img src="images/senior.png" alt="user foto"></div>
+                                <div class="user-name">
+                                    <h3>Dolores Vidal Taylor</h3>
+                                    <p>Comercial</p>
+                                </div>
+                                <button class="red-button">Send Message</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="profile-card red-card">
+                                <div><img src="images/senior.png" alt="user foto"></div>
+                                <div class="user-name">
+                                    <h3>Robbie Walker Jr.</h3>
+                                    <p>CEO NY Memorial</p>
+                                </div>
+                                <button class="red-button">Send Message</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="profile-card red-card">
+                                <div><img src="images/senior.png" alt="user foto"></div>
+                                <div class="user-name">
+                                    <h3>Vanessa Herrera Simons</h3>
+                                    <p>Nurse</p>
+                                </div>
+                                <button class="green-button">Send Message</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of circle care -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/es.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/main.js"></script>
+        
+    </main>
+    
+</body>
+</html>
