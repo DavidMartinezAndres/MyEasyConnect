@@ -128,7 +128,8 @@ namespace MyEasyConnect.Controllers
         }
 
         [Route("getCircleCare")]
-        public List<Worker> GetCircleCare(GetCircleRQ requestItem)
+        [HttpPost]
+        public GetCircleRS GetCircleCare([FromBody] GetCircleRQ requestItem)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT W.IDWORKER          IdWorker, ");
@@ -164,18 +165,22 @@ namespace MyEasyConnect.Controllers
                     using (OracleDataAdapter data = new OracleDataAdapter(cmd))
                     {
                         data.Fill(table);
-                        return table.AsEnumerable().Select(dr =>
-                            new Worker()
-                            {
-                                Id = Convert.ToInt32(dr["IDWORKER"]),
-                                Name = dr["NAME"].ToString(),
-                                FirstSurname = dr["FIRSTSURNAME"].ToString(),
-                                SecondSurname = dr["SECONDSURNAME"].ToString(),
-                                ProfilePicture = dr["PROFILEPICTURE"].ToString(),
-                                Points = Convert.ToInt32(dr["POINTS"]),
-                                Job = dr["JOB"].ToString()
-                            }
-                        ).ToList();
+                        return new GetCircleRS()
+                        {
+                            WorkerList = table.AsEnumerable().Select(dr =>
+                                new Worker()
+                                {
+                                    Id = Convert.ToInt32(dr["IDWORKER"]),
+                                    Name = dr["NAME"].ToString(),
+                                    FirstSurname = dr["FIRSTSURNAME"].ToString(),
+                                    SecondSurname = dr["SECONDSURNAME"].ToString(),
+                                    ProfilePicture = dr["PROFILEPICTURE"].ToString(),
+                                    Points = Convert.ToInt32(dr["POINTS"]),
+                                    Job = dr["JOB"].ToString()
+                                }
+                            ).ToList()
+                        };
+                         
 
                     }
                 }

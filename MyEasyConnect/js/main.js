@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    // Get worker
-    getWorker();
-
     // Uncomment this line to change the language to english
     moment.locale('en')
     let now = moment().startOf('month')
@@ -103,8 +100,6 @@ function updateCalendar(now) {
     
 }
 
-
-
 function toggleReminder(ev) {
     if (ev.target.classList.contains('fa-angle-right')) {
         ev.target.classList.remove('fa-angle-right')
@@ -125,14 +120,22 @@ function toggleReminder(ev) {
 
 (async function getCircleCare() {
     let workerId = 1
-    let request = await fetch("http://localhost:62114/getCircleCare?id="+workerId)    
-    let workers = await request.json()
+    let request = await fetch("http://localhost:62114/GetCircleCare", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            "WorkerId": workerId,
+
+        }),
+    })  
+    let workersrequest = await request.json()
+    let workers = workersrequest.WorkerList
     workers.forEach(worker => {
         let div = document.createElement("div")
         let mainDiv = document.createElement("div")
-        mainDiv.classList.add("profile-card","red-card")
-        let profileCard = document.createElement("div")
-        
+        mainDiv.classList.add("profile-card","red-card")    
 
         let imgDiv = document.createElement("div")
         let userImg = document.createElement("img")
@@ -165,7 +168,7 @@ function toggleReminder(ev) {
         document.querySelector("#team-wrapper").appendChild(div)
     });
 })()
-function getWorker() {
+(function getWorker() {
     fetch("http://localhost:62114/getWorker/?id=" + "1", {
         method: 'POST',
         body: JSON.stringify({
@@ -176,11 +179,9 @@ function getWorker() {
 
         }
     }).then(res => res.json()).then(response => {
-        console.log(response);
-        console.log(response.Worker.Name);
         $('#imagenUsuario').attr('src', "images/senior.png");
         $('#nombreUsuario').text(response.Worker.Name + " " + response.Worker.FirstSurname);
 
     });
-    }
+})()
 
