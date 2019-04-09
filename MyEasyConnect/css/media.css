@@ -1,0 +1,49 @@
+@media (max-width: 640px) {
+    nav {
+        position: relative;
+    }
+    nav strong {
+        display: none;
+    }
+    #logo {
+        width: 50%;
+        margin: 0;
+    }
+    .additionalbanner-img {
+        display: none;
+    }
+    nav ul {
+        padding: 0;
+        margin: 0;
+        width: 30%;
+    }
+    nav ul li {
+        margin: 0 auto;
+    }
+    .separator {
+        display: none;
+    }
+    .wrapper { 
+        width: 90%;
+    }
+    #menu-wrapper {
+        margin: 0;
+    }
+    .menu-actions {
+        width: 190px;
+        font-size: 9pt;
+    }
+    .action-data img {
+        height: 70px;
+    }
+    .totalPoins {
+        width: 25%;
+    }
+    #mail-menu input{
+        display: inline-block;
+    }
+    #reminders, #circle-care {
+        display: none;
+    }
+    
+}
