@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // Get worker
     getWorker(1);
+    getReminders(1);
 
     // Uncomment this line to change the language to english
     moment.locale('en')
@@ -126,9 +127,22 @@ function updateCalendar(now) {
 }
 function getWorker(id) {
     $.get("http://localhost:62114/getWorker/?id=" + id, function (data, status) {
-        console.log(data);
         data.ProfilePicture = "images/senior.png"; 
         $('#imagenUsuario').attr('src', data.ProfilePicture);
        $('#nombreUsuario').text(data.Name + " " + data.FirstSurname)
+    });
+}
+
+function getReminders(id) {
+    $.get("http://localhost:62114/getReminders/?id=" + id, function (data, status) {
+        console.log(data);
+
+        data.forEach(function (reminder) {
+            $('#reminderTitle').text(reminder.Title);
+            $('#reminderSubtitle').text(reminder.Subtitle);
+            console.log(reminder);
+        });
+      
+
     });
 }
