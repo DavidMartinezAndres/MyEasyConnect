@@ -278,8 +278,18 @@
                 reminders: []
             },
             created: async function () {
-                let items = await fetch("http://localhost:62114/GetCorreos?id=" + "1")
-                this.messages = await items.json()
+                let items = await fetch(this.uri + "/getCorreos", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        "WorkerId": 1,
+
+                    }),
+                })
+                let correosResponse = await items.json()
+                this.messages = await correosResponse.Mails
 
                 let items2 = await fetch(this.uri + "/getReminders", {
                     method: "POST",
