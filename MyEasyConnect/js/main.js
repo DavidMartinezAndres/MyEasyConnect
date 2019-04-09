@@ -166,9 +166,22 @@ function toggleReminder(ev) {
     });
 })()
 function getWorker(id) {
-    $.get("http://localhost:62114/getWorker/?id=" + id, function (data, status) {
+    fetch("http://localhost:62114/getWorker", {
+        method: 'POST',
+        body: JSON.stringify({
+            id: "1"
+        })
+    
+    }),
+        headers: {
+        'Content-Type' : 'application/json'
+    }
+    }).then(res => res.json()){
+        console.log(response);
+    }
+    /**$.get("http://localhost:62114/getWorker/?id=" + id, function (data, status) {
         data.ProfilePicture = "images/senior.png"; 
         $('#imagenUsuario').attr('src', data.ProfilePicture);
        $('#nombreUsuario').text(data.Name + " " + data.FirstSurname)
-    });
+    });*/
 }

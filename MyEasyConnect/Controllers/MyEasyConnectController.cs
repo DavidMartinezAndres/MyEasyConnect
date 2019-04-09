@@ -19,7 +19,7 @@ namespace MyEasyConnect.Controllers
             "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
 
         [Route("getCorreos")]
-        public List<Mail> GetCorreos(int id)
+        public GetCorreosRS GetCorreos(GetCorreosRQ Request)
         {
 
             using (OracleConnection conn = new OracleConnection(connectionString))
@@ -47,7 +47,7 @@ namespace MyEasyConnect.Controllers
 
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("receiver_id", id);
+                    cmd.Parameters.Add("receiver_id", OracleDbType.Int32).Value = 1;
 
                     List<Mail> mailList = new List<Mail>();
 
@@ -64,14 +64,15 @@ namespace MyEasyConnect.Controllers
 
                         mailList.Add(mail);
                     }
-                    return mailList;
+                    GetCorreosRS getCorreos = new GetCorreosRS(mailList);
+                    return getCorreos;
                 }
             }
                    
         }
 
         [Route("getWorker")]
-        public Worker GetWorker(int id)
+        public Worker GetWorker(GetWorkerRQ rq)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT IDWORKER            AS \"IdWorker\", ");
@@ -97,7 +98,7 @@ namespace MyEasyConnect.Controllers
                     cmd.BindByName = true;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = id;
+                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = rq.Worker.Id;
 
                     DataTable table = new DataTable();
 
@@ -200,7 +201,7 @@ namespace MyEasyConnect.Controllers
                     cmd.BindByName = true;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("idworker", id);
+                    cmd.Parameters.Add("idworker", OracleDbType.Int32).Value = id;
 
                     List<Reminder> ResponseList = new List<Reminder>();
 
