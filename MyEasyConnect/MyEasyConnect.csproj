@@ -92,6 +92,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetRemindersRQ.cs" />
+    <Compile Include="Models\GetRemindersRS.cs" />
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\Worker.cs" />

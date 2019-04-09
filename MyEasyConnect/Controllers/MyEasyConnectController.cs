@@ -176,16 +176,18 @@ namespace MyEasyConnect.Controllers
         }
 
         [Route("getReminders")]
-        public List<Reminder> GetReminders(int id)
+        [HttpPost]
+        public GetRemindersRS GetReminders([FromBody] GetRemindersRQ requestItem)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append("SELECT idreminder           AS \"Id\", ");
-            sql.Append("       remindertitle        AS \"Title\", ");
-            sql.Append("       remindersubtitle     AS \"Subtitle\", ");
-            sql.Append("       reminderdate         AS \"EventDate\", ");
-            sql.Append("       description          AS \"Description\" ");
+            sql.Append("SELECT idreminder           Id, ");
+            sql.Append("       remindertitle        Title, ");
+            sql.Append("       remindersubtitle     Subtitle, ");
+            sql.Append("       reminderdate         EventDate, ");
+            sql.Append("       description          Description ");
             sql.Append("  FROM dmartinez.reminder ");
             sql.Append(" WHERE idworker = :idworker ");
+
 
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
@@ -200,7 +202,7 @@ namespace MyEasyConnect.Controllers
                     cmd.BindByName = true;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("idworker", id);
+                    cmd.Parameters.Add("idworker", requestItem.WorkerId);
 
                     List<Reminder> ResponseList = new List<Reminder>();
 
@@ -209,16 +211,16 @@ namespace MyEasyConnect.Controllers
                     {
                         Reminder reminder = new Reminder();
 
-                        reminder.Id = Convert.ToInt32(dr["Id"]);
-                        reminder.Title = Convert.ToString(dr["Title"]);
-                        reminder.Subtitle = Convert.ToString(dr["Subtitle"]);
-                        reminder.EventDate = Convert.ToString(dr["EventDate"]);
-                        reminder.Description = Convert.ToString(dr["Description"]);
+                        reminder.Id = Convert.ToInt32(dr["ID"]);
+                        reminder.Title = Convert.ToString(dr["TITLE"]);
+                        reminder.Subtitle = Convert.ToString(dr["SUBTITLE"]);
+                        reminder.EventDate = Convert.ToString(dr["EVENTDATE"]);
+                        reminder.Description = Convert.ToString(dr["DESCRIPTION"]);
 
                         ResponseList.Add(reminder);
                     }
 
-                    return ResponseList;
+                    return new GetRemindersRS { ReminderList = ResponseList };
                 }
 
             }
