@@ -128,7 +128,7 @@ namespace MyEasyConnect.Controllers
         }
 
         [Route("getCircleCare")]
-        public List<Worker> GetCircleCare(int id)
+        public List<Worker> GetCircleCare(GetCircleRQ requestItem)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT W.IDWORKER          IdWorker, ");
@@ -157,7 +157,7 @@ namespace MyEasyConnect.Controllers
                     cmd.BindByName = true;
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = id;
+                    cmd.Parameters.Add("IDWORKER", OracleDbType.Int32).Value = requestItem.WorkerId;
 
                     DataTable table = new DataTable();
 
