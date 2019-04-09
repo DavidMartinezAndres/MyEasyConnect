@@ -130,7 +130,6 @@ function updateCalendar(now) {
     let workerId = 1
     let request = await fetch("http://localhost:62114/getCircleCare?id="+workerId)    
     let workers = await request.json()
-    console.log(workers)
     workers.forEach(worker => {
         let div = document.createElement("div")
         let mainDiv = document.createElement("div")
@@ -180,12 +179,6 @@ function getWorker(id) {
 function getReminders(id) {
     $.get("http://localhost:62114/getReminders/?id=" + id, function (data, status) {
         console.log(data);
-
-        data.forEach(function (reminder) {
-            $('#reminderTitle').text(reminder.Title);
-            $('#reminderSubtitle').text(reminder.Subtitle);
-            console.log(reminder);
-        });
       
 
     });
