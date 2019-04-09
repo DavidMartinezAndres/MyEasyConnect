@@ -1,7 +1,6 @@
 $(document).ready(function () {
     // Get worker
     getWorker(1);
-    getReminders(1);
 
     // Uncomment this line to change the language to english
     moment.locale('en')
@@ -33,27 +32,26 @@ $(document).ready(function () {
         updateCalendar(now.add(0, 'months'))
     )
 
+   //Mail stuff
+   $('.expand-mail').click((ev) => {
+    if (ev.target.classList.contains('fa-angle-right')) {
+        ev.target.classList.remove('fa-angle-right')
+        ev.target.classList.add('fa-angle-down')
+    } else {
+        ev.target.classList.remove('fa-angle-down')
+        ev.target.classList.add('fa-angle-right')
+    }
 
-    //Mail stuff
-    $('.expand-mail').click((ev) => {
-        if (ev.target.classList.contains('fa-angle-right')) {
-            ev.target.classList.remove('fa-angle-right')
-            ev.target.classList.add('fa-angle-down')
-        } else {
-            ev.target.classList.remove('fa-angle-down')
-            ev.target.classList.add('fa-angle-right')
-        }
 
+    let element = ev.target.parentElement.parentElement.parentElement
+    .querySelector("article")
 
-        let element = ev.target.parentElement.parentElement.parentElement
-        .querySelector("article")
-
-        if (element.classList.contains('hidden')) {
-            element.classList.remove('hidden')
-        } else {
-            element.classList.add('hidden')
-        }
-    })
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden')
+    } else {
+        element.classList.add('hidden')
+    }
+})
 
     $('.delete-mail').click((ev) => {
         let element = ev.target.parentElement.parentElement.parentElement
@@ -61,26 +59,6 @@ $(document).ready(function () {
 
         element.querySelector("article")
     })
-    $('.expand-reminder').click((ev) => {
-        if (ev.target.classList.contains('fa-close')) {
-            ev.target.classList.remove('fa-close')
-            ev.target.classList.add('fa-angle-down')
-        } else {
-            ev.target.classList.remove('fa-angle-down')
-            ev.target.classList.add('fa-close')
-        }
-
-
-        let element = ev.target.parentElement.parentElement
-        .querySelector(".expanded-reminder")
-
-        if (element.classList.contains('hidden')) {
-            element.classList.remove('hidden')
-        } else {
-            element.classList.add('hidden')
-        }
-    })
-
     
 })
 
@@ -119,11 +97,30 @@ function updateCalendar(now) {
             $('#calendar-body').append(tr)
             tr = document.createElement("tr")
         }
-
         dayOfMonth.add('1','day')
     }
     $('#calendar-body').append(tr)
     
+}
+
+
+
+function toggleReminder(ev) {
+    if (ev.target.classList.contains('fa-angle-right')) {
+        ev.target.classList.remove('fa-angle-right')
+        ev.target.classList.add('fa-angle-down')
+    } else {
+        ev.target.classList.remove('fa-angle-down')
+        ev.target.classList.add('fa-angle-right')
+    }
+
+    let element = ev.target.parentElement.parentElement
+    .querySelector("#reminderDescription")
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden')
+    } else {
+        element.classList.add('hidden')
+    }
 }
 
 (async function getCircleCare() {
@@ -173,13 +170,5 @@ function getWorker(id) {
         data.ProfilePicture = "images/senior.png"; 
         $('#imagenUsuario').attr('src', data.ProfilePicture);
        $('#nombreUsuario').text(data.Name + " " + data.FirstSurname)
-    });
-}
-
-function getReminders(id) {
-    $.get("http://localhost:62114/getReminders/?id=" + id, function (data, status) {
-        console.log(data);
-      
-
     });
 }

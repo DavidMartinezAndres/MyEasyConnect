@@ -197,9 +197,9 @@
                                         <h4 id="reminderTitle">{{reminder.Title}}</h4>
                                         <p id="reminderSubtitle">{{reminder.Subtitle}}</p>
                                     </div>
-                                    <i class="fa fa-close expand-reminder"></i>
+                                    <i class="fa fa-close expand-reminder" onclick="toggleReminder(event)"></i>
                                 </div>
-                                <div id="reminderDescription class="expanded-reminder bg-primary ">
+                                <div id="reminderDescription" class="expanded-reminder bg-primary ">
                                     <p><strong>{{reminder.EventDate}}</strong></p>
                                     <p>{{reminder.Description}}</p>
                                     <div class="button-group">
