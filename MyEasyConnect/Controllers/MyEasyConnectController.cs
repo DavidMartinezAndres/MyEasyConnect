@@ -19,9 +19,9 @@ namespace MyEasyConnect.Controllers
             "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
 
         [Route("getCorreos")]
-        public List<Mail> GetCorreos(int id)
+        [HttpPost]
+        public GetCorreosRS GetCorreos([FromBody] GetCorreosRQ requestItem)
         {
-
             using (OracleConnection conn = new OracleConnection(connectionString))
             {
                 conn.Open();
@@ -32,14 +32,15 @@ namespace MyEasyConnect.Controllers
 
                     StringBuilder sql = new StringBuilder();
                     sql.Append("SELECT id, ");
-                    sql.Append("       status                   AS \"Estado\", ");
-                    sql.Append("       sbuject                  AS \"Asunto\", ");
-                    sql.Append("       sending_date             AS \"Fecha\", ");
-                    sql.Append("       body_text                AS \"Mensaje\", ");
-                    sql.Append("       WORKER.NAME              AS \"Nombre\", ");
-                    sql.Append("       WORKER.first_surname     AS \"Apellido\" ");
-                    sql.Append("  FROM dmartinez.MESSAGE INNER JOIN dmartinez.worker ON WORKER.IDWORKER = MESSAGE.SENDER_ID ");
+                    sql.Append("       status              Status, ");
+                    sql.Append("       sbuject             Subject, ");
+                    sql.Append("       sending_date        MailDate, ");
+                    sql.Append("       body_text           MessageBody, ");
+                    sql.Append("       W.NAME              Sender, ");
+                    sql.Append("       W.FIRST_SURNAME     FirstSurname ");
+                    sql.Append("  FROM dmartinez.MESSAGE M INNER JOIN DMARTINEZ.WORKER W ON W.IDWORKER = M.SENDER_ID ");
                     sql.Append(" WHERE receiver_id = :receiver_id ");
+
 
                     cmd.CommandText = sql.ToString();
 
@@ -47,24 +48,26 @@ namespace MyEasyConnect.Controllers
 
                     cmd.CommandType = CommandType.Text;
 
-                    cmd.Parameters.Add("receiver_id", id);
+                    cmd.Parameters.Add("receiver_id", requestItem.WorkerId);
 
                     List<Mail> mailList = new List<Mail>();
 
                     OracleDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Mail mail = new Mail();
-                        mail.Id = Convert.ToInt32(dr["Estado"]);
-                        mail.Subject = Convert.ToString(dr["Asunto"]);
-                        mail.MailDate = Convert.ToString(dr["Fecha"]);
-                        mail.MessageBody = Convert.ToString(dr["Mensaje"]);
-                        mail.SenderName = Convert.ToString(dr["Nombre"]);
-                        mail.SenderSurname = Convert.ToString(dr["Apellido"]);
+                        Mail mail = new Mail
+                        {
+                            Id = Convert.ToInt32(dr["STATUS"]),
+                            Subject = Convert.ToString(dr["SUBJECT"]),
+                            MailDate = Convert.ToString(dr["MAILDATE"]),
+                            MessageBody = Convert.ToString(dr["MESSAGEBODY"]),
+                            SenderName = Convert.ToString(dr["SENDER"]),
+                            SenderSurname = Convert.ToString(dr["FIRSTSURNAME"])
+                        };
 
                         mailList.Add(mail);
                     }
-                    return mailList;
+                    return new GetCorreosRS() { Mails = mailList };
                 }
             }
                    
@@ -122,7 +125,7 @@ namespace MyEasyConnect.Controllers
         }
 
         [Route("getCircleCare")]
-        public List<Worker> getCircleCare(int id)
+        public List<Worker> GetCircleCare(int id)
         {
             StringBuilder sql = new StringBuilder();
             sql.Append("SELECT W.IDWORKER          AS \"IdWorker\", ");
@@ -209,13 +212,14 @@ namespace MyEasyConnect.Controllers
                     OracleDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Reminder reminder = new Reminder();
-
-                        reminder.Id = Convert.ToInt32(dr["ID"]);
-                        reminder.Title = Convert.ToString(dr["TITLE"]);
-                        reminder.Subtitle = Convert.ToString(dr["SUBTITLE"]);
-                        reminder.EventDate = Convert.ToString(dr["EVENTDATE"]);
-                        reminder.Description = Convert.ToString(dr["DESCRIPTION"]);
+                        Reminder reminder = new Reminder
+                        {
+                            Id = Convert.ToInt32(dr["ID"]),
+                            Title = Convert.ToString(dr["TITLE"]),
+                            Subtitle = Convert.ToString(dr["SUBTITLE"]),
+                            EventDate = Convert.ToString(dr["EVENTDATE"]),
+                            Description = Convert.ToString(dr["DESCRIPTION"])
+                        };
 
                         ResponseList.Add(reminder);
                     }
