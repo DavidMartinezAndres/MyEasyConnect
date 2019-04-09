@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // Get worker
     getWorker(1);
+    getReminders(1);
 
     // Uncomment this line to change the language to english
     moment.locale('en')
@@ -129,7 +130,6 @@ function updateCalendar(now) {
     let workerId = 1
     let request = await fetch("http://localhost:62114/getCircleCare?id="+workerId)    
     let workers = await request.json()
-    console.log(workers)
     workers.forEach(worker => {
         let div = document.createElement("div")
         let mainDiv = document.createElement("div")
@@ -170,9 +170,16 @@ function updateCalendar(now) {
 })()
 function getWorker(id) {
     $.get("http://localhost:62114/getWorker/?id=" + id, function (data, status) {
-        console.log(data);
         data.ProfilePicture = "images/senior.png"; 
         $('#imagenUsuario').attr('src', data.ProfilePicture);
        $('#nombreUsuario').text(data.Name + " " + data.FirstSurname)
+    });
+}
+
+function getReminders(id) {
+    $.get("http://localhost:62114/getReminders/?id=" + id, function (data, status) {
+        console.log(data);
+      
+
     });
 }

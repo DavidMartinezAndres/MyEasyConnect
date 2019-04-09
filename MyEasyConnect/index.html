@@ -189,35 +189,25 @@
                     <div id="today-schedule">
                         <h3>TODAY</h3>
                         <p>2 JULY / MONDAY</p>
-                        <div class="reminder-wrapper">
-                            <div class="reminder">
-                                <i class="fa fa-phone"></i>
-                                <div class="reminder-info">
-                                    <h4>Call Dr. Smith</h4>
-                                    <p>675 557 890</p>
-                                </div>
-                            </div>
-                        </div>
 
-
-                        <div class="reminder-wrapper">
-                            <div class="reminder">
-                                <i class="fa fa-calendar"></i>
-                                <div class="reminder-info">
-                                    <h4>OcularTest</h4>
-                                    <p>Memorial Clinic Miami</p>
+                        <div v-for="reminder in reminders" class="reminder-wrapper">
+                                <div class="reminder">
+                                    <i class="fa fa-calendar"></i>
+                                    <div class="reminder-info">
+                                        <h4 id="reminderTitle">{{reminder.Title}}</h4>
+                                        <p id="reminderSubtitle">{{reminder.Subtitle}}</p>
+                                    </div>
+                                    <i class="fa fa-close expand-reminder"></i>
                                 </div>
-                                <i class="fa fa-close expand-reminder"></i>
-                            </div>
-                            <div class="expanded-reminder bg-primary ">
-                                <p>2 JULY 2012 / <strong>14:30</strong></p>
-                                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate, laborum aspernatur, illo earum consequuntur odio eligendi quo qui reprehenderit aut beatae architecto doloremque ipsa, eius dicta sapiente. Maiores, accusantium fugiat.</p>
-                                <div class="button-group">
-                                    <button class="green-button">CHANGE</button>
-                                    <button class="red-button">DONE</button>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
+                                <div id="reminderDescription class="expanded-reminder bg-primary ">
+                                    <p><strong>{{reminder.EventDate}}</strong></p>
+                                    <p>{{reminder.Description}}</p>
+                                    <div class="button-group">
+                                        <button class="green-button">CHANGE</button>
+                                        <button class="red-button">DONE</button>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>                          
                         </div>
 
 
@@ -282,15 +272,16 @@
         var app = new Vue({
             el: '#app',
             data: {
-                messages: []
+                messages: [],
+                reminders: []
             },
             created: async function () {
                 let items = await fetch("http://localhost:62114/GetCorreos?id=" + "1")
                 this.messages = await items.json()
+                let items2 = await fetch("http://localhost:62114/getReminders?id=" + "1")
+                this.reminders = await items2.json()
             },
         })
-
-
 
     </script>
 
