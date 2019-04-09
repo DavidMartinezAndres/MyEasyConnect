@@ -18,7 +18,7 @@ namespace MyEasyConnect.Controllers
             "(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=" + ConfigurationManager.AppSettings["DBServiceName"] + ")));" +
             "User Id=" + ConfigurationManager.AppSettings["DBUser"] + ";Password=" + ConfigurationManager.AppSettings["DBPassword"] + ";";
 
-        [Route("GetCorreos")]
+        [Route("getCorreos")]
         public List<Mail> GetCorreos(int id)
         {
 
